@@ -7,3 +7,5 @@
 ##功能
 1. 快速创建Module
  
+ ## 安装  
+ 在插件市场搜索 TemplatePlugin 自行安装即可
