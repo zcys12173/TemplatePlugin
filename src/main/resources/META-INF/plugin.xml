@@ -1,0 +1,90 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.syc.plugin</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>TemplatePlugin</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="zcys12173@163.com" url="https://github.com/zcys12173">zcys12173</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    An Plugin to create Template<br>
+    <em>An Plugin to create Template</em>
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+<!--    <extensions defaultExtensionNs="com.intellij">-->
+<!--        <projectService serviceImplementation="cn.huohua.programming.sparkplugin.service.SpProjectService"/>-->
+<!--        <applicationService serviceImplementation="cn.huohua.programming.sparkplugin.service.SpApplicationService"/>-->
+<!--        <applicationConfigurable-->
+<!--                parentId="tools"-->
+<!--                instance="cn.huohua.programming.sparkplugin.setting.SpApplicationSetting"-->
+<!--                displayName="SpApplicationSetting"/>-->
+<!--        <applicationService serviceImplementation="cn.huohua.programming.sparkplugin.persistence.SpSettingState"/>-->
+<!--    </extensions>-->
+
+<!--    <applicationListeners>-->
+<!--        <listener class="cn.huohua.programming.sparkplugin.listener.SpApplicationListener"-->
+<!--                  topic="com.intellij.ide.AppLifecycleListener"/>-->
+<!--    </applicationListeners>-->
+
+<!--    <projectListeners>-->
+<!--        <listener class="cn.huohua.programming.sparkplugin.listener.SpProjectListener"-->
+<!--                  topic="com.intellij.openapi.project.ProjectManagerListener"/>-->
+<!--    </projectListeners>-->
+    <actions>
+        <action id="cn.huohua.programming.sparkplugin.action.FileAction"
+                class="cn.huohua.programming.sparkplugin.action.FileAction"
+                text="FileAction"
+                description="FileAction">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+
+<!--        <action id="cn.huohua.programming.sparkplugin.action.MixtureAction"-->
+<!--                class="cn.huohua.programming.sparkplugin.action.MixtureAction"-->
+<!--                text="MixtureAction"-->
+<!--                description="MixtureAction">-->
+<!--            <add-to-group group-id="ToolsMenu" anchor="first"/>-->
+<!--        </action>-->
+<!--        <group id="cn.huohua.programming.sparkplugin.actiongroup.DynamicActionGroup"-->
+<!--               class="cn.huohua.programming.sparkplugin.actiongroup.DynamicActionGroup"-->
+<!--               text="DynamicActionGroup"-->
+<!--               popup="true"-->
+<!--               description="DynamicActionGroup">-->
+<!--            <add-to-group group-id="ToolsMenu" anchor="first"/>-->
+
+<!--        </group>-->
+<!--        <group id="cn.huohua.programming.sparkplugin.actiongroup.CustomDefaultActionGroup"-->
+<!--               class="cn.huohua.programming.sparkplugin.actiongroup.CustomDefaultActionGroup"-->
+<!--               popup="true"-->
+<!--               text="CustomDefaultActionGroup" description="CustomDefaultActionGroup">-->
+<!--            <add-to-group group-id="NewGroup" anchor="first"/>-->
+<!--            <action-->
+<!--                    text="ChildAction"-->
+<!--                    description="ChildAction"-->
+<!--                    id="cn.huohua.programming.sparkplugin.action.CustomGroupedAction"-->
+<!--                    class="cn.huohua.programming.sparkplugin.action.ChildAction"/>-->
+<!--        </group>-->
+
+
+
+        <group id="syc.plugin.MyActionGroup"
+               class="syc.plugin.MyActionGroup"
+               text="Template"
+               popup="true"
+               description="Template Group">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </group>
+    </actions>
+</idea-plugin>
