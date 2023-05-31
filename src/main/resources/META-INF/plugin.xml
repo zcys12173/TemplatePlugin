@@ -81,10 +81,16 @@
 
         <group id="syc.plugin.MyActionGroup"
                class="syc.plugin.MyActionGroup"
+               icon="AllIcons.Actions.NewFolder"
                text="Template"
                popup="true"
                description="Template Group">
             <add-to-group group-id="NewGroup" anchor="last"/>
         </group>
     </actions>
+    <application-components>
+        <component>
+            <implementation-class>syc.plugin.TemplatePlugin</implementation-class>
+        </component>
+    </application-components>
 </idea-plugin>
