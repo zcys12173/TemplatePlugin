@@ -4,8 +4,12 @@
   目前主要针对 [SycApp](https://github.com/zcys12173/SycApp) 工程结构进行开发  
   
   
-##功能
+## 功能
 1. 快速创建Module
  
- ## 安装  
- 在插件市场搜索 TemplatePlugin 自行安装即可
+## 安装  
+在插件市场搜索 TemplatePlugin 自行安装即可
+
+
+## 使用
+![Image text](https://raw.githubusercontent.com/zcys12173/TemplatePlugin/main/images/use.png)
