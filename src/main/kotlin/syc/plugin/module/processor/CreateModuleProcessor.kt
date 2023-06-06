@@ -1,7 +1,6 @@
 package syc.plugin.module.processor
 
 import com.intellij.openapi.project.Project
-import com.intellij.util.ReflectionUtil
 import org.apache.commons.io.FileUtils
 import syc.plugin.TemplatePlugin
 import syc.plugin.createDir
@@ -31,6 +30,42 @@ class CreateModuleProcessor(
         createThemes()
         createMipmap()
         createSampleManifest()
+        createSampleActivity()
+    }
+
+    private fun createSampleActivity(){
+        val ktFile = createFile("${getModuleFile()}/src/sample/java/$packagePath/MainActivity.kt")
+        ktFile.writeText("""
+            package $packageName
+
+            import android.os.Bundle
+            import com.syc.mvvm.framework.base.BaseActivity
+
+            class MainActivity:BaseActivity() {
+                override fun onCreate(savedInstanceState: Bundle?) {
+                    super.onCreate(savedInstanceState)
+                    setContentView(R.layout.activity_main)
+                }
+            }
+        """.trimIndent())
+        val layoutFile = createFile("${getModuleFile()}/src/sample/res/layout/activity_main.xml")
+        layoutFile.writeText("""
+            <?xml version="1.0" encoding="utf-8"?>
+            <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+                <TextView
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello World!"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        """.trimIndent())
     }
 
     private fun createSampleManifest() {
@@ -48,6 +83,14 @@ class CreateModuleProcessor(
                     android:supportsRtl="true"
                     android:theme="@style/Theme.SycApp">
                  
+                    <activity
+                        android:name=".MainActivity"
+                        android:exported="true">
+                        <intent-filter>
+                            <action android:name="android.intent.action.MAIN" />
+                            <category android:name="android.intent.category.LAUNCHER" />
+                        </intent-filter>
+                    </activity>
                 </application>
 
             </manifest>
@@ -78,7 +121,7 @@ class CreateModuleProcessor(
     private fun createMainSource() {
         createJavaSource("main")
         createRes("main")
-        createManifest("main")
+        createMainManifest()
     }
 
     private fun modifySettingFile() {
@@ -146,11 +189,12 @@ class CreateModuleProcessor(
 
 
 
-    private fun createManifest(sourceName: String) {
-        val manifestFile = createFile("${getModuleFile()}/src/$sourceName/AndroidManifest.xml")
+    private fun createMainManifest() {
+        val manifestFile = createFile("${getModuleFile()}/src/main/AndroidManifest.xml")
         manifestFile.writeText("""
             <?xml version="1.0" encoding="utf-8"?>
-            <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+            <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+                    package="$packageName">
 
             </manifest>
         """.trimIndent())
@@ -162,8 +206,8 @@ class CreateModuleProcessor(
         createDir("${getModuleFile()}/src/$sourceName/res/values")
     }
 
-    private fun createJavaSource(sourceName:String) {
-        createDir("${getModuleFile()}/src/$sourceName/java/$packagePath")
+    private fun createJavaSource(sourceName:String):File {
+        return createDir("${getModuleFile()}/src/$sourceName/java/$packagePath")
     }
 
 

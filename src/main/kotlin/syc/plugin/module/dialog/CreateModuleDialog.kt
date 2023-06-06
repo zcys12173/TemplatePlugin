@@ -23,14 +23,14 @@ class CreateModuleDialog : DialogWrapper(true) {
         init()
     }
 
-    override fun createCenterPanel(): JComponent? {
+    override fun createCenterPanel(): JComponent {
         val panel = JPanel(GridBagLayout())
         val constraints = GridBagConstraints()
         constraints.fill = GridBagConstraints.HORIZONTAL
         constraints.insets = Insets(5, 5, 5, 5)
 
         // ModuleName Label and TextField
-        val moduleNameLabel = JLabel("ModuleName:")
+        val moduleNameLabel = JLabel("Module name:")
         moduleNameField = JTextField()
         moduleNameField.preferredSize = Dimension(300, moduleNameField.preferredSize?.height ?: 0)
         constraints.gridx = 0
@@ -41,7 +41,7 @@ class CreateModuleDialog : DialogWrapper(true) {
         panel.add(moduleNameField, constraints)
 
         // PackageName Label and TextField
-        val packageNameLabel = JLabel("PackageName:")
+        val packageNameLabel = JLabel("Package name:")
         packageNameField = JTextField()
         packageNameField.text = defaultPackageName
         packageNameField.preferredSize = Dimension(300, packageNameField.preferredSize?.height ?: 0)
@@ -55,11 +55,11 @@ class CreateModuleDialog : DialogWrapper(true) {
 
         moduleNameField.document.addDocumentListener(object : DocumentListener, javax.swing.event.DocumentListener {
             override fun insertUpdate(e: DocumentEvent?) {
-                packageNameField.text = defaultPackageName+moduleNameField.text
+                packageNameField.text = getPackageName(moduleNameField.text)
             }
 
             override fun removeUpdate(e: DocumentEvent?) {
-                packageNameField.text = defaultPackageName+moduleNameField.text
+                packageNameField.text = getPackageName(moduleNameField.text)
             }
 
             override fun changedUpdate(e: DocumentEvent?) {
@@ -68,6 +68,16 @@ class CreateModuleDialog : DialogWrapper(true) {
 
         })
         return panel
+    }
+
+    private fun getPackageName(moduleName:String):String{
+        val splits = moduleName.split("-")
+        val name = if(splits.size > 1){
+            splits[1]
+        }else{
+            splits[0]
+        }
+        return defaultPackageName+name
     }
 
     val packageName: String
