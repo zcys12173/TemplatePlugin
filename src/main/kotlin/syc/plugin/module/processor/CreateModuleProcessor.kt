@@ -10,7 +10,8 @@ import java.io.File
 class CreateModuleProcessor(
     private val project: Project,
     private val moduleName: String,
-    private val packageName: String
+    private val packageName: String,
+    private val dirPath:String,
 ) {
     private val packagePath = packageName.replace(".","/")
     fun process(){
@@ -126,9 +127,14 @@ class CreateModuleProcessor(
 
     private fun modifySettingFile() {
         val settingFile = File("${project.basePath}/settings.gradle")
+        val prefix = if(dirPath.contains("core")){
+            ":core"
+        }else{
+            ":feature"
+        }
         settingFile.appendText("""
             
-            include ':$moduleName'
+            include '$prefix:$moduleName'
         """.trimIndent())
     }
 
@@ -240,7 +246,7 @@ class CreateModuleProcessor(
     }
 
     private fun getModuleFile():File{
-        val moduleFile = File("${project.basePath}/$moduleName")
+        val moduleFile = File("$dirPath/$moduleName")
         if(!moduleFile.exists()){
            moduleFile.mkdirs()
         }
