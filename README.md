@@ -6,6 +6,7 @@
   
 ## 功能
 1. 快速创建Module
+2. 快速创建MVVM框架下的Activity(Activity+ViewModel+layout.xml)
  
 ## 安装  
 1. 自行下载[插件jar](https://github.com/zcys12173/TemplatePlugin/tree/main/release/TemplatePlugin-1.0.0.jar)文件，本地安装  
